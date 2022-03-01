@@ -66,14 +66,14 @@ const loadDetails = (slug) => {
 
 const diaplayLoadDetails = (singlePhone) => {
     const sensorList = (singlePhone.mainFeatures.sensors).join();
-    console.log(singlePhone.mainFeatures.sensors)
+    console.log(singlePhone.others)
     const detailsContainer = document.getElementById('details');
     detailsContainer.textContent = '';
     const div = document.createElement('div');
 
     div.classList.add('card');
     div.innerHTML = `
-    <img src="${singlePhone.image}" class="card-img-top w-50 rounded mx-auto d-block " alt="...">
+    <img src="${singlePhone.image}" class="card-img-top w-25 rounded mx-auto d-block " alt="...">
     <div class="card-body">
       <p class="card-text"><span class="fw-bold">Name: </span>${singlePhone.name}</p>
       <p class="card-text"><span class="fw-bold">Brand: </span>${singlePhone.brand}</p>
@@ -84,7 +84,15 @@ const diaplayLoadDetails = (singlePhone) => {
       <p class="card-text"><span>Display Size: </span>${singlePhone.mainFeatures.displaySize}</p>
       <p class="card-text"><span>Chip Set: </span>${singlePhone.mainFeatures.chipSet}</p>
       <p class="card-text"><span>Memory: </span>${singlePhone.mainFeatures.memory}</p>
-      <p class="card-text">Sensor: </span>${singlePhone.mainFeatures.sensors.join(' ') ? singlePhone.mainFeatures.sensors : 'not found'}</p>
+      <p class="fw-bold">Sensor: </p> 
+      <p class="card-text">${singlePhone.mainFeatures.sensors.join(' ') ? singlePhone.mainFeatures.sensors : 'not found'}</p>
+      <p class="fw-bold">Others: </p> 
+      <p class="card-text"><span>Bluetooth: </span>${singlePhone?.others?.Bluetooth ?? "No result Found"}</p>
+      <p class="card-text"><span>GPS: </span>${singlePhone?.others?.GPS ?? "No result Found"}</p>
+      <p class="card-text"><span>NFC: </span>${singlePhone?.others?.NFC ?? "No result Found"}</p>
+      <p class="card-text"><span>Radio: </span>${singlePhone?.others?.Radio ?? "No result Found"}</p>
+      <p class="card-text"><span>USB: </span>${singlePhone?.others?.USB ?? "No result Found"}</p>
+      <p class="card-text"><span>WLAN: </span>${singlePhone?.others?.WLAN ?? "No result Found"}</p>
 
 
     </div>
