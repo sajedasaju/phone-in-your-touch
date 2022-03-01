@@ -31,11 +31,22 @@
                 <input id="search-input" type="text" class="form-control" placeholder="phone name"
                     aria-label="phone name" aria-describedby="basic-addon2">
                 <div class="input-group-append ">
-                    <button onclick="loadSearchPhones()" class="btn search-btn" type="button">Search phone</button>
+                    <button onclick="searchPhones()" class="btn search-btn" type="button">Search phone</button>
 
                 </div>
             </div>
         </section>
+
+        <section class="phonesDisplay text-center">
+            <div class="row row-cols-1 row-cols-md-3 g-4" id="displayPhones">
+
+            </div>
+            <button onclick="showAllSearchPhones()" class="button" id="show-all">Show
+                All</button>
+
+        </section>
+
+
     </main>
 
 
