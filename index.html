@@ -13,10 +13,31 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body>
+<body class="bg-color">
+    <!-- header section  added -->
     <header>
-        <h2>Phone InYourTouch</h2>
+        <div class="d-flex justify-content-center align-items-center mt-4 pb-5">
+            <img src="./images/logo.png" alt="" width="60px">
+            <h2>Phone InYourTouch</h2>
+        </div>
     </header>
+
+    <!-- main section start -->
+    <main class="container">
+        <!-- search section -->
+        <section class="search mt-5">
+
+            <div class="input-group mb-3 ">
+                <input id="search-input" type="text" class="form-control" placeholder="phone name"
+                    aria-label="phone name" aria-describedby="basic-addon2">
+                <div class="input-group-append ">
+                    <button onclick="loadSearchPhones()" class="btn search-btn" type="button">Search phone</button>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
 
 
     <!-- bootstrap script file -->

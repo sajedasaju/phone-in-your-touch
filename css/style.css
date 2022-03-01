@@ -1,0 +1,16 @@
+.bg-color{
+ background-color: rgba(40, 59, 75, 0.637);
+ background-image: linear-gradient(rgb(71, 139, 160),rgb(40, 75, 92));
+ background-repeat: no-repeat;
+ height: 100vh;
+}
+.search-btn{
+    background-color: cadetblue;
+    color: whitesmoke;
+
+}
+.search-btn:hover{
+    background-color: cadetblue;
+    color: black;
+
+}
