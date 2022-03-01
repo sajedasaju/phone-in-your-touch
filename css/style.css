@@ -12,13 +12,24 @@ background-attachment: fixed;
 
 
 }
+header::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: rgba(102, 152, 177, 0.911);
+    position: absolute;
+    top: 100px;
+    
+
+}
 .search-btn{
     background-color: cadetblue;
     color: whitesmoke;
 
 }
 .search-btn:hover{
-    background-color: cadetblue;
+    background-color: rgb(79, 125, 128);
     color: black;
 
 }
@@ -43,4 +54,23 @@ background-attachment: fixed;
     width: 50%;
     height: 60%;
 
+}
+.close{
+    color: red;
+    background-color: burlywood;
+    width: 10%;
+    height: 80%;
+}
+#spinner {
+    display: none;
+    margin-top: 20px;
+
+}
+
+#gif {
+     
+     width: 8%;
+    height: 10%;
+    border-radius: 50%;
+   
 }

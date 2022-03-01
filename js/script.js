@@ -7,19 +7,26 @@ const searchPhones = () => {
         .then(data => displaySearchPhones(data.data))
 
     document.getElementById('search-input').value = '';
+    //display spinner
+    toggleSpinner('block');
 
 }
+//function for spinner
+const toggleSpinner = displayStyle => {
+    document.getElementById('spinner').style.display = displayStyle;
+}
+
+//function for collection of cards
 const cards = (phone, phoneContainer) => {
-    // console.log(phone)
     const div = document.createElement('div');
     div.classList.add('col');
     div.innerHTML = ` <div class="card h-100  align-items-center bg-body rounded shadow-lg ">
         <img src="${phone.image}" class="card-img-top w-50" alt="...">
         <div class="card-body ">
-            <h5 class="card-title"> <span >Phone Name : </span><span class="text-color  fw-bold">${phone.phone_name}</span></h5>
-            <p class="card-text"><span >Brand Name : </span><span class="text-color fw-bold">${phone.brand}</span></p>
+            <h5 class="card-title"> <span class="fs-6 fw-bold">Phone Name : </span><span class="text-color  fw-bold">${phone.phone_name}</span></h5>
+            <p class="card-text"><span class="fs-6 fw-bold">Brand Name : </span><span class="text-color fw-bold">${phone.brand}</span></p>
             <div class="card-footer">
-            <button onclick="loadDetails('${phone.slug}')" class="button">Phone Details</button>
+            <a href="#details"><button onclick="loadDetails('${phone.slug}')" class="button">Phone Details</button></a>
       </div>
             
         </div>
@@ -28,20 +35,21 @@ const cards = (phone, phoneContainer) => {
 
 
 }
+//display phone collection
 const displaySearchPhones = phones => {
     const phoneContainer = document.getElementById('displayPhones');
     const errorCOntainer = document.getElementById('phoneNotFound');
     phoneContainer.textContent = '';
     errorCOntainer.textContent = '';
     let count = 0;
-    // console.log(phones.length)
+
 
     if (phones.length <= 0) {
 
         const div = document.createElement('div');
         div.classList.add('d-flex', "justify-content-center", "align-items-center")
-        div.innerHTML = `<img class="img-fluid me-2" src="./images/cross.png" alt="" width="40px">
-        <h3>Phone is currently unavailable</h3>
+        div.innerHTML = `<img class="me-2" src="./images/cross.png" alt="" width="30px">
+        <h3 class="fs-5">Phone is currently unavailable</h3>
         `
         errorCOntainer.appendChild(div);
 
@@ -53,58 +61,68 @@ const displaySearchPhones = phones => {
             cards(phone, phoneContainer);
         });
     }
+    //remove spinner 
+    toggleSpinner('none');
 
 }
 
-//Details of each phone
+//fetch Details of each phone
 const loadDetails = (slug) => {
     const url = `https://openapi.programming-hero.com/api/phone/${slug}`;
     fetch(url)
         .then(res => res.json())
         .then(data => diaplayLoadDetails(data.data))
+    // display spinner 
+    toggleSpinner('block');
 }
 
+
+//display individual phone details
 const diaplayLoadDetails = (singlePhone) => {
-    const sensorList = (singlePhone.mainFeatures.sensors).join();
-    console.log(singlePhone.others)
     const detailsContainer = document.getElementById('details');
     detailsContainer.textContent = '';
     const div = document.createElement('div');
 
-    div.classList.add('card');
+    div.classList.add('card', 'fs-5', 'lh-1');
     div.innerHTML = `
+    <button onclick="closeCard()" type="button" class="btn-close" aria-label="Close"></button>
     <img src="${singlePhone.image}" class="card-img-top w-25 rounded mx-auto d-block " alt="...">
     <div class="card-body">
       <p class="card-text"><span class="fw-bold">Name: </span>${singlePhone.name}</p>
       <p class="card-text"><span class="fw-bold">Brand: </span>${singlePhone.brand}</p>
-      <p class="card-text"><span class="fw-bold">Release Date: </span>${singlePhone.releaseDate ? singlePhone.releaseDate : 'Release date not found'}</p>
+      <p class="card-text border-bottom border-secondary"><span class="fw-bold b">Release Date: </span>${singlePhone.releaseDate ? singlePhone.releaseDate : 'Release date not found'}</p>
       
       <p class="fw-bold">Main Features:</p> 
-      <p class="card-text">Storage: </span>${singlePhone.mainFeatures.storage}</p>
-      <p class="card-text"><span>Display Size: </span>${singlePhone.mainFeatures.displaySize}</p>
-      <p class="card-text"><span>Chip Set: </span>${singlePhone.mainFeatures.chipSet}</p>
-      <p class="card-text"><span>Memory: </span>${singlePhone.mainFeatures.memory}</p>
-      <p class="fw-bold">Sensor: </p> 
+      <p class="card-text">Storage --> </span>${singlePhone.mainFeatures.storage}</p>
+      <p class="card-text"><span>Display Size --> </span>${singlePhone.mainFeatures.displaySize}</p>
+      <p class="card-text"><span>Chip Set --> </span>${singlePhone.mainFeatures.chipSet}</p>
+      <p class="card-text border-bottom border-secondary"><span>Memory --> </span>${singlePhone.mainFeatures.memory}</p>
+
+      <p class="fw-bold border-bottom border-secondary">Sensor:</p> 
       <p class="card-text">${singlePhone.mainFeatures.sensors.join(' ') ? singlePhone.mainFeatures.sensors : 'not found'}</p>
-      <p class="fw-bold">Others: </p> 
-      <p class="card-text"><span>Bluetooth: </span>${singlePhone?.others?.Bluetooth ?? "No result Found"}</p>
-      <p class="card-text"><span>GPS: </span>${singlePhone?.others?.GPS ?? "No result Found"}</p>
-      <p class="card-text"><span>NFC: </span>${singlePhone?.others?.NFC ?? "No result Found"}</p>
-      <p class="card-text"><span>Radio: </span>${singlePhone?.others?.Radio ?? "No result Found"}</p>
-      <p class="card-text"><span>USB: </span>${singlePhone?.others?.USB ?? "No result Found"}</p>
-      <p class="card-text"><span>WLAN: </span>${singlePhone?.others?.WLAN ?? "No result Found"}</p>
+
+      <p class="fw-bold border-bottom border-secondary">Others: </p> 
+      <p class="card-text"><span>Bluetooth --> </span>${singlePhone?.others?.Bluetooth ?? "No result Found"}</p>
+      <p class="card-text"><span>GPS --> </span>${singlePhone?.others?.GPS ?? "No result Found"}</p>
+      <p class="card-text"><span>NFC --> </span>${singlePhone?.others?.NFC ?? "No result Found"}</p>
+      <p class="card-text"><span>Radio --> </span>${singlePhone?.others?.Radio ?? "No result Found"}</p>
+      <p class="card-text"><span>USB --> </span>${singlePhone?.others?.USB ?? "No result Found"}</p>
+      <p class="card-text"><span>WLAN --> </span>${singlePhone?.others?.WLAN ?? "No result Found"}</p>
 
 
     </div>
     `
     detailsContainer.appendChild(div)
+    //remove spinner 
+    toggleSpinner('none');
 
 }
 
-const sensorList = (sensors) => {
+//for close button in card
+const closeCard = () => {
 
-    const list = sensors.join(',');
-    console.log('hjkj', list);
+    const detailsContainer = document.getElementById('details');
+    detailsContainer.textContent = '';
 
 }
 
