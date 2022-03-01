@@ -70,36 +70,29 @@ const diaplayLoadDetails = (singlePhone) => {
     const detailsContainer = document.getElementById('details');
     detailsContainer.textContent = '';
     const div = document.createElement('div');
-    div.classList.add('row', 'bg-white', 'g-5', 'align-items-center');
+
+    div.classList.add('card');
     div.innerHTML = `
-                    <div class="col-12 col-lg-4">
-                    <img src="${singlePhone.image}" class="" alt="...">
-                    </div>
-                    <div class="col-12 col-lg-8 lh-1">
-                    
-                    <p><span class="fw-bold">Name: </span>${singlePhone.name}</p>
-                    <p><span class="fw-bold">Brand: </span>${singlePhone.brand}</p>
-                    <p><span class="fw-bold">Release Date: </span>${singlePhone.releaseDate ? singlePhone.releaseDate : 'Release date not found'}</p>
-
-                    <p class="fw-bold">Main Features:</p> 
-                    <p><span>Storage: </span>${singlePhone.mainFeatures.storage}</p>
-                    <p><span>Display Size: </span>${singlePhone.mainFeatures.displaySize}</p>
-                    <p><span>Chip Set: </span>${singlePhone.mainFeatures.chipSet}</p>
-                    <p><span>Memory: </span>${singlePhone.mainFeatures.memory}</p>
-                    <p><span>Memory: </span>${singlePhone.mainFeatures.sensors.join(' ') ? singlePhone.mainFeatures.sensors : 'Not found'}}</p>
-
-                    <button  onclick="sensorList('${singlePhone.mainFeatures.sensors}')" class="button">Sensor</button>
-                   
-                    
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                 
-                    `
+    <img src="${singlePhone.image}" class="card-img-top w-50 rounded mx-auto d-block " alt="...">
+    <div class="card-body">
+      <p class="card-text"><span class="fw-bold">Name: </span>${singlePhone.name}</p>
+      <p class="card-text"><span class="fw-bold">Brand: </span>${singlePhone.brand}</p>
+      <p class="card-text"><span class="fw-bold">Release Date: </span>${singlePhone.releaseDate ? singlePhone.releaseDate : 'Release date not found'}</p>
+      
+      <p class="fw-bold">Main Features:</p> 
+      <p class="card-text">Storage: </span>${singlePhone.mainFeatures.storage}</p>
+      <p class="card-text"><span>Display Size: </span>${singlePhone.mainFeatures.displaySize}</p>
+      <p class="card-text"><span>Chip Set: </span>${singlePhone.mainFeatures.chipSet}</p>
+      <p class="card-text"><span>Memory: </span>${singlePhone.mainFeatures.memory}</p>
+      <p class="card-text">Sensor: </span>${singlePhone.mainFeatures.sensors.join(' ') ? singlePhone.mainFeatures.sensors : 'not found'}</p>
 
 
-    detailsContainer.appendChild(div);
+    </div>
+    `
+    detailsContainer.appendChild(div)
 
 }
+
 const sensorList = (sensors) => {
 
     const list = sensors.join(',');
