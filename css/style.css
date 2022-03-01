@@ -1,7 +1,15 @@
-.bg-color{
- background-color: rgba(40, 59, 75, 0.637);
+html{
+    height: 100%;
+}
+body{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
  background-image: linear-gradient(rgb(71, 139, 160),rgb(40, 75, 92));
  background-repeat: no-repeat;
+min-height: 100%;
+background-attachment: fixed;
+
 
 }
 .search-btn{
@@ -20,7 +28,7 @@
 .button{
     border: none;
     border-radius: 30px;
-    padding: 5px 20px;
+    padding: 3px 20px;
     background-image: linear-gradient(35deg,rgb(103, 154, 170),rgb(59, 107, 129));
     backdrop-filter: blur(2px);
 }
@@ -30,4 +38,9 @@
 }
 #show-all{
     display: none;
+}
+.img-size{
+    width: 50%;
+    height: 60%;
+
 }

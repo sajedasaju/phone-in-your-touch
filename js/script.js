@@ -10,12 +10,12 @@ const searchPhones = () => {
 
 }
 const cards = (phone, phoneContainer) => {
-    console.log(phone)
+    // console.log(phone)
     const div = document.createElement('div');
     div.classList.add('col');
-    div.innerHTML = ` <div class="card h-100">
-        <img src="${phone.image}" class="card-img-top" alt="...">
-        <div class="card-body text-center">
+    div.innerHTML = ` <div class="card h-100  align-items-center bg-body rounded shadow-lg ">
+        <img src="${phone.image}" class="card-img-top w-50" alt="...">
+        <div class="card-body ">
             <h5 class="card-title"> <span >Phone Name : </span><span class="text-color  fw-bold">${phone.phone_name}</span></h5>
             <p class="card-text"><span >Brand Name : </span><span class="text-color fw-bold">${phone.brand}</span></p>
             <div class="card-footer">
@@ -48,7 +48,7 @@ const displaySearchPhones = phones => {
     }
     else {
 
-        phones.slice(0, 5).forEach(phone => {
+        phones.slice(0, 20).forEach(phone => {
             count++;
             cards(phone, phoneContainer);
         });
@@ -56,9 +56,56 @@ const displaySearchPhones = phones => {
 
 }
 
+//Details of each phone
+const loadDetails = (slug) => {
+    const url = `https://openapi.programming-hero.com/api/phone/${slug}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => diaplayLoadDetails(data.data))
+}
+
+const diaplayLoadDetails = (singlePhone) => {
+    const sensorList = (singlePhone.mainFeatures.sensors).join();
+    console.log(singlePhone.mainFeatures.sensors)
+    const detailsContainer = document.getElementById('details');
+    detailsContainer.textContent = '';
+    const div = document.createElement('div');
+    div.classList.add('row', 'bg-white', 'g-5', 'align-items-center');
+    div.innerHTML = `
+                    <div class="col-12 col-lg-4">
+                    <img src="${singlePhone.image}" class="" alt="...">
+                    </div>
+                    <div class="col-12 col-lg-8 lh-1">
+                    
+                    <p><span class="fw-bold">Name: </span>${singlePhone.name}</p>
+                    <p><span class="fw-bold">Brand: </span>${singlePhone.brand}</p>
+                    <p><span class="fw-bold">Release Date: </span>${singlePhone.releaseDate ? singlePhone.releaseDate : 'Release date not found'}</p>
+
+                    <p class="fw-bold">Main Features:</p> 
+                    <p><span>Storage: </span>${singlePhone.mainFeatures.storage}</p>
+                    <p><span>Display Size: </span>${singlePhone.mainFeatures.displaySize}</p>
+                    <p><span>Chip Set: </span>${singlePhone.mainFeatures.chipSet}</p>
+                    <p><span>Memory: </span>${singlePhone.mainFeatures.memory}</p>
+                    <p><span>Memory: </span>${singlePhone.mainFeatures.sensors.join(' ') ? singlePhone.mainFeatures.sensors : 'Not found'}}</p>
+
+                    <button  onclick="sensorList('${singlePhone.mainFeatures.sensors}')" class="button">Sensor</button>
+                   
+                    
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                 
+                    `
 
 
+    detailsContainer.appendChild(div);
 
+}
+const sensorList = (sensors) => {
+
+    const list = sensors.join(',');
+    console.log('hjkj', list);
+
+}
 
 /* const showAllSearchPhones = (phones) => {
     const searchFeild = document.getElementById('search-input');
