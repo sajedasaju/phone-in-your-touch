@@ -12,6 +12,8 @@ const searchPhones = () => {
     toggleSpinner('block');
     show = document.getElementById('showAllPhones');
     show.style.display = 'none';
+    const detailsContainer = document.getElementById('details');
+    detailsContainer.textContent = '';
 
 }
 //function for spinner
