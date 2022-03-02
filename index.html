@@ -19,7 +19,7 @@
 
 <body class="bg-color">
     <!-- header section  added -->
-    <header class="bor">
+    <header>
         <div class="d-flex justify-content-center align-items-center mt-4 pb-5">
             <img src="./images/logo.png" alt="" width="60px">
             <h2>Phone InYourTouch</h2>
@@ -30,9 +30,9 @@
     <main class="container">
 
         <!-- search section -->
-        <section class="search mt-5">
+        <section class="search mt-5 row">
 
-            <div class="input-group mb-3 ">
+            <div class="input-group mb-3 col-12">
                 <input id="search-input" type="text" class="form-control" placeholder="phone name"
                     aria-label="phone name" aria-describedby="basic-addon2">
                 <div class="input-group-append ">
@@ -42,7 +42,7 @@
             </div>
 
             <!-- //spinner -->
-            <div id="spinner" class="text-center">
+            <div id="spinner" class="text-center col-12">
                 <img id="gif" src="./gif/toggling.gif" alt="">
 
             </div>
@@ -67,10 +67,12 @@
         <!-- collection of phone  -->
 
         <section class="phonesDisplay text-center" id="phoneCollection">
-            <div class="row row-cols-1 row-cols-md-3 g-5" id="displayPhones">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-3 g-5" id="displayPhones">
 
 
 
+                </div>
             </div>
             <button onclick="showAllCollection()" class="button mt-5 mx-auto" id="showAllPhones">Show all</button>
 
