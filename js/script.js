@@ -10,6 +10,8 @@ const searchPhones = () => {
     document.getElementById('search-input').value = '';
     //display spinner
     toggleSpinner('block');
+    show = document.getElementById('showAllPhones');
+    show.style.display = 'none';
 
 }
 //function for spinner
