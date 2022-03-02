@@ -1,6 +1,7 @@
+let searchText;
 const searchPhones = () => {
     const searchFeild = document.getElementById('search-input');
-    const searchText = searchFeild.value;
+    searchText = searchFeild.value;
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     fetch(url)
         .then(res => res.json())
@@ -35,7 +36,7 @@ const cards = (phone, phoneContainer) => {
 
 
 }
-//display phone collection
+//display phone collection first 20
 const displaySearchPhones = phones => {
     const phoneContainer = document.getElementById('displayPhones');
     const errorCOntainer = document.getElementById('phoneNotFound');
@@ -59,14 +60,46 @@ const displaySearchPhones = phones => {
         phones.slice(0, 20).forEach(phone => {
             count++;
             cards(phone, phoneContainer);
+
         });
+        const show = document.getElementById('showAllPhones');
+        show.style.display = 'block';
+
     }
     //remove spinner 
     toggleSpinner('none');
 
+
 }
 
-//fetch Details of each phone
+//fetch phone collection more than 20
+const showAllCollection = () => {
+    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayRemainingCollections(data.data))
+    //display spinner 
+    toggleSpinner('block');
+
+}
+//display phone collection more than 20
+const displayRemainingCollections = (phones) => {
+
+    const phoneContainer = document.getElementById('displayPhones');
+    let count = 0;
+    console.log(phoneContainer, phones)
+    phones.slice(20).forEach(phone => {
+        count++;
+        cards(phone, phoneContainer);
+
+    });
+    show = document.getElementById('showAllPhones');
+    show.style.display = 'none';
+    //remove spinner 
+    toggleSpinner('none');
+}
+
+//fetch Details of individual phone
 const loadDetails = (slug) => {
     const url = `https://openapi.programming-hero.com/api/phone/${slug}`;
     fetch(url)
@@ -88,26 +121,27 @@ const diaplayLoadDetails = (singlePhone) => {
     <button onclick="closeCard()" type="button" class="btn-close" aria-label="Close"></button>
     <img src="${singlePhone.image}" class="card-img-top w-25 rounded mx-auto d-block " alt="...">
     <div class="card-body">
-      <p class="card-text"><span class="fw-bold">Name: </span>${singlePhone.name}</p>
-      <p class="card-text"><span class="fw-bold">Brand: </span>${singlePhone.brand}</p>
-      <p class="card-text border-bottom border-secondary"><span class="fw-bold b">Release Date: </span>${singlePhone.releaseDate ? singlePhone.releaseDate : 'Release date not found'}</p>
+    
+      <p class="card-text"><span class="text-color fw-bold">Name: </span>${singlePhone.name}</p>
+      <p class="card-text"><span class="text-color fw-bold">Brand: </span>${singlePhone.brand}</p>
+      <p class="card-text border-bottom border-secondary"><span class="text-color fw-bold b">Release Date: </span>${singlePhone.releaseDate ? singlePhone.releaseDate : 'Release date not found'}</p>
       
-      <p class="fw-bold">Main Features:</p> 
-      <p class="card-text">Storage --> </span>${singlePhone.mainFeatures.storage}</p>
-      <p class="card-text"><span>Display Size --> </span>${singlePhone.mainFeatures.displaySize}</p>
-      <p class="card-text"><span>Chip Set --> </span>${singlePhone.mainFeatures.chipSet}</p>
-      <p class="card-text border-bottom border-secondary"><span>Memory --> </span>${singlePhone.mainFeatures.memory}</p>
+      <p class="text-color fw-bold">Main Features:</p> 
+      <p class="card-text ms-2">Storage  <small class="text-color fw-bold">--></small>  </span>${singlePhone.mainFeatures.storage}</p>
+      <p class="card-text ms-2"><span>Display Size  <small class="text-color fw-bold">--></small>  </span>${singlePhone.mainFeatures.displaySize}</p>
+      <p class="card-text ms-2"><span>Chip Set <small class="text-color fw-bold">--></small>  </span>${singlePhone.mainFeatures.chipSet}</p>
+      <p class="card-text ms-2 border-bottom border-secondary"><span>Memory  <small class="text-color fw-bold">--></small>  </span>${singlePhone.mainFeatures.memory}</p>
 
-      <p class="fw-bold border-bottom border-secondary">Sensor:</p> 
-      <p class="card-text">${singlePhone.mainFeatures.sensors.join(' ') ? singlePhone.mainFeatures.sensors : 'not found'}</p>
+      <p class="text-color fw-bold border-bottom border-secondary">Sensor:</p> 
+      <p class="card-text ms-2">${singlePhone.mainFeatures.sensors.join(' ') ? singlePhone.mainFeatures.sensors : 'not found'}</p>
 
-      <p class="fw-bold border-bottom border-secondary">Others: </p> 
-      <p class="card-text"><span>Bluetooth --> </span>${singlePhone?.others?.Bluetooth ?? "No result Found"}</p>
-      <p class="card-text"><span>GPS --> </span>${singlePhone?.others?.GPS ?? "No result Found"}</p>
-      <p class="card-text"><span>NFC --> </span>${singlePhone?.others?.NFC ?? "No result Found"}</p>
-      <p class="card-text"><span>Radio --> </span>${singlePhone?.others?.Radio ?? "No result Found"}</p>
-      <p class="card-text"><span>USB --> </span>${singlePhone?.others?.USB ?? "No result Found"}</p>
-      <p class="card-text"><span>WLAN --> </span>${singlePhone?.others?.WLAN ?? "No result Found"}</p>
+      <p class="text-color fw-bold border-bottom border-secondary">Others: </p> 
+      <p class="card-text ms-2"><span>Bluetooth  <small class="text-color fw-bold">--></small>  </span>${singlePhone?.others?.Bluetooth ?? "No result Found"}</p>
+      <p class="card-text ms-2"><span>GPS  <small class="text-color fw-bold">--></small>  </span>${singlePhone?.others?.GPS ?? "No result Found"}</p>
+      <p class="card-text ms-2"><span>NFC  <small class="text-color fw-bold">--></small>  </span>${singlePhone?.others?.NFC ?? "No result Found"}</p>
+      <p class="card-text ms-2"><span>Radio  <small class="text-color fw-bold">--></small>  </span>${singlePhone?.others?.Radio ?? "No result Found"}</p>
+      <p class="card-text ms-2"><span>USB <small class="text-color fw-bold">--></small> </span>${singlePhone?.others?.USB ?? "No result Found"}</p>
+      <p class="card-text ms-2"><span>WLAN <small class="text-color fw-bold">--> </small> </span>${singlePhone?.others?.WLAN ?? "No result Found"}</p>
 
 
     </div>
