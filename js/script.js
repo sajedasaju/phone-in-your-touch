@@ -44,6 +44,8 @@ const cards = (phone, phoneContainer) => {
 const displaySearchPhones = phones => {
     const phoneContainer = document.getElementById('displayPhones');
     const errorCOntainer = document.getElementById('phoneNotFound');
+    const detailsContainer = document.getElementById('details');
+    detailsContainer.textContent = '';
     phoneContainer.textContent = '';
     errorCOntainer.textContent = '';
     let count = 0;
